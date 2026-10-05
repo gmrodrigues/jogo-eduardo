@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://bffs0yqr2jdrx"]
+
+[ext_resource type="Texture2D" path="res://background.png" id="1_background"]
+[ext_resource type="PackedScene" uid="uid://byque4w54oowj" path="res://player/player.tscn" id="2_qohg2"]
+[ext_resource type="Script" uid="uid://b82khw4uc07n4" path="res://level/enemy_spawner.gd" id="3_qohg2"]
+[ext_resource type="Script" path="res://level/level.gd" id="4_level"]
+[ext_resource type="Script" path="res://level/crosshair.gd" id="5_crosshair"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lp0r"]
+size = Vector2(2400, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vertical"]
+size = Vector2(40, 1400)
+
+[node name="Node2D" type="Node2D" unique_id=1204540409]
+script = ExtResource("4_level")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1873210728]
+position = Vector2(0, 700)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=934537725]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=23521638]
+shape = SubResource("RectangleShape2D_1lp0r")
+
+[node name="Node2D2" type="Node2D" parent="." unique_id=1833063023]
+position = Vector2(-1200, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D2" unique_id=1886419040]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D2/StaticBody2D" unique_id=125005153]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/StaticBody2D" unique_id=602243951]
+shape = SubResource("RectangleShape2D_vertical")
+
+[node name="Node2D3" type="Node2D" parent="." unique_id=4828972]
+position = Vector2(1200, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D3" unique_id=1144782311]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D3/StaticBody2D" unique_id=37790887]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D3/StaticBody2D" unique_id=160009285]
+shape = SubResource("RectangleShape2D_vertical")
+
+[node name="Node2D4" type="Node2D" parent="." unique_id=859677566]
+position = Vector2(0, -700)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D4" unique_id=1218849156]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D4/StaticBody2D" unique_id=356326251]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D4/StaticBody2D" unique_id=1511707299]
+shape = SubResource("RectangleShape2D_1lp0r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=540709910]
+z_index = -2
+scale = Vector2(4, 3.448276)
+texture = ExtResource("1_background")
+
+[node name="enemy spawner" type="Node2D" parent="." unique_id=648546045]
+script = ExtResource("3_qohg2")
+
+[node name="Marker2D" type="Marker2D" parent="enemy spawner" unique_id=338538440]
+position = Vector2(-1000, -500)
+
+[node name="Marker2D2" type="Marker2D" parent="enemy spawner" unique_id=1915823336]
+position = Vector2(1000, -500)
+
+[node name="Marker2D3" type="Marker2D" parent="enemy spawner" unique_id=17682526]
+position = Vector2(-1000, 500)
+
+[node name="Marker2D4" type="Marker2D" parent="enemy spawner" unique_id=1537782748]
+position = Vector2(1000, 500)
+
+[node name="Timer" type="Timer" parent="enemy spawner" unique_id=802767034]
+autostart = true
+
+[node name="player" parent="." unique_id=225577043 instance=ExtResource("2_qohg2")]
+position = Vector2(0, 0)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="HUD"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 384.0
+offset_bottom = 58.0
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 384.0
+offset_bottom = 94.0
+text = "VIDA  100 / 100"
+theme_override_colors/font_color = Color(1, 0.92, 0.92, 1)
+theme_override_font_sizes/font_size = 20
+
+[node name="Crosshair" type="Control" parent="HUD"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 36.0
+offset_bottom = 36.0
+mouse_filter = 2
+script = ExtResource("5_crosshair")
+
+[connection signal="timeout" from="enemy spawner/Timer" to="enemy spawner" method="_on_timer_timeout"]

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bth2w6ctpogiy"]
+
+[ext_resource type="Script" uid="uid://ihjgcjbxg7wv" path="res://character_body_2d.gd" id="1_nevrd"]
+[ext_resource type="Texture2D" uid="uid://tpi7gay7d4rk" path="res://etr4w5.jpg" id="2_xmg5n"]
+[ext_resource type="PackedScene" uid="uid://dw35m80pwgo1u" path="res://gun/gun.tscn" id="3_hnl72"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8ai3"]
+size = Vector2(224, 275)
+
+[node name="Node2D" type="Node2D" unique_id=1450272573]
+
+[node name="player" type="CharacterBody2D" parent="." unique_id=1980154307]
+script = ExtResource("1_nevrd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=1622361228]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_a8ai3")
+
+[node name="Sprite2D" type="Sprite2D" parent="player" unique_id=1789131000]
+texture = ExtResource("2_xmg5n")
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=1124693724]
+zoom = Vector2(0.5, 0.5)
+
+[node name="Node2D" parent="." unique_id=911219868 instance=ExtResource("3_hnl72")]
+position = Vector2(113, -2)

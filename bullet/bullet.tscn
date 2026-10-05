@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://ctp0o18g7yp8p"]
+
+[ext_resource type="Script" uid="uid://of6fbdy6euju" path="res://bullet/bullet.gd" id="1_6wip1"]
+[ext_resource type="Texture2D" path="res://bullet.png" id="2_bullet"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a8ai3"]
+
+[sub_resource type="Shader" id="Shader_transparency"]
+code = "shader_type canvas_item;\n\nvoid fragment() {\n\tvec4 pixel = texture(TEXTURE, UV);\n\tfloat channel_spread = max(pixel.r, max(pixel.g, pixel.b)) - min(pixel.r, min(pixel.g, pixel.b));\n\tif (channel_spread < 0.055 && pixel.r > 0.72) {\n\t\tdiscard;\n\t}\n\tCOLOR = pixel * COLOR;\n}\n"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_transparency"]
+shader = SubResource("Shader_transparency")
+
+[node name="bullet" type="Node2D" unique_id=865266501]
+script = ExtResource("1_6wip1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1652404096]
+position = Vector2(-1, 0)
+scale = Vector2(0.11, 0.11)
+material = SubResource("ShaderMaterial_transparency")
+texture = ExtResource("2_bullet")
+flip_h = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1773054691]
+scale = Vector2(20, 20)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=439876151]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=946818972]
+scale = Vector2(2.4, 2.4)
+shape = SubResource("CircleShape2D_a8ai3")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
