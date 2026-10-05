@@ -13,11 +13,6 @@ func _ready() -> void:
 	_bind_button($MovePad/Down, &"down")
 	_bind_button($MovePad/Left, &"left")
 	_bind_button($MovePad/Right, &"right")
-	_bind_button($AimPad/Up, &"aim_up")
-	_bind_button($AimPad/Down, &"aim_down")
-	_bind_button($AimPad/Left, &"aim_left")
-	_bind_button($AimPad/Right, &"aim_right")
-	_bind_button($AimPad/Fire, &"click")
 
 func _exit_tree() -> void:
 	for action: StringName in bound_actions:

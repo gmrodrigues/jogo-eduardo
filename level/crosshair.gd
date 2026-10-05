@@ -3,23 +3,23 @@ extends Control
 const CROSSHAIR_COLOR := Color(1.0, 0.16, 0.12, 0.95)
 const CROSSHAIR_SHADOW := Color(0.08, 0.0, 0.0, 0.9)
 
-var touch_aim_direction := Vector2.RIGHT
+var touch_position := Vector2.ZERO
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	touch_position = get_viewport_rect().size * 0.75
 	queue_redraw()
 
 func _process(_delta: float) -> void:
-	var touch_aim: Vector2 = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
-	if DisplayServer.is_touchscreen_available() or touch_aim.length_squared() > 0.01:
-		if touch_aim.length_squared() > 0.01:
-			touch_aim_direction = touch_aim.normalized()
-		var viewport_size: Vector2 = get_viewport_rect().size
-		var aim_distance: float = minf(viewport_size.x, viewport_size.y) * 0.28
-		position = viewport_size * 0.5 + touch_aim_direction * aim_distance - size * 0.5
+	if DisplayServer.is_touchscreen_available():
+		position = touch_position - size * 0.5
 	else:
 		position = get_viewport().get_mouse_position() - size * 0.5
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		touch_position = event.position
 
 func _draw() -> void:
 	var center: Vector2 = size * 0.5

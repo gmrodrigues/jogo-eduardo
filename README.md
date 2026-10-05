@@ -7,7 +7,7 @@ Jogo 2D feito em Godot 4.7.1. Inimigos surgem aleatoriamente ao redor da arena, 
 - `W`, `A`, `S`, `D`: mover o jogador
 - Mouse: mirar
 - Botão esquerdo do mouse: atirar
-- Celular: direcionais na tela para mover e mirar, com botão `TIRO`
+- Celular: direcional na tela para mover; toque na arena para mirar e atirar
 
 ## Abrir o projeto
 
