@@ -48,6 +48,23 @@ click={
 ]
 }
 
+aim_up={
+"deadzone": 0.2,
+"events": []
+}
+aim_down={
+"deadzone": 0.2,
+"events": []
+}
+aim_left={
+"deadzone": 0.2,
+"events": []
+}
+aim_right={
+"deadzone": 0.2,
+"events": []
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

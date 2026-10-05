@@ -5,12 +5,37 @@
 [ext_resource type="Script" uid="uid://b82khw4uc07n4" path="res://level/enemy_spawner.gd" id="3_qohg2"]
 [ext_resource type="Script" path="res://level/level.gd" id="4_level"]
 [ext_resource type="Script" path="res://level/crosshair.gd" id="5_crosshair"]
+[ext_resource type="Script" path="res://level/mobile_controls.gd" id="6_mobile"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lp0r"]
 size = Vector2(2400, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vertical"]
 size = Vector2(40, 1400)
+
+[sub_resource type="StyleBoxFlat" id="MobileButtonNormal"]
+bg_color = Color(0.04, 0.05, 0.07, 0.68)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.9, 0.9, 0.72)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="MobileButtonPressed"]
+bg_color = Color(0.85, 0.12, 0.08, 0.82)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.86, 0.7, 0.95)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="Node2D" type="Node2D" unique_id=1204540409]
 script = ExtResource("4_level")
@@ -111,5 +136,129 @@ offset_right = 36.0
 offset_bottom = 36.0
 mouse_filter = 2
 script = ExtResource("5_crosshair")
+
+[node name="MobileControls" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_mobile")
+
+[node name="MovePad" type="Control" parent="HUD/MobileControls"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -244.0
+offset_right = 244.0
+offset_bottom = -24.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Up" type="Button" parent="HUD/MobileControls/MovePad"]
+offset_left = 78.0
+offset_right = 142.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("MobileButtonNormal")
+theme_override_styles/pressed = SubResource("MobileButtonPressed")
+text = "▲"
+
+[node name="Down" type="Button" parent="HUD/MobileControls/MovePad"]
+offset_left = 78.0
+offset_top = 156.0
+offset_right = 142.0
+offset_bottom = 220.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("MobileButtonNormal")
+theme_override_styles/pressed = SubResource("MobileButtonPressed")
+text = "▼"
+
+[node name="Left" type="Button" parent="HUD/MobileControls/MovePad"]
+offset_top = 78.0
+offset_right = 64.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("MobileButtonNormal")
+theme_override_styles/pressed = SubResource("MobileButtonPressed")
+text = "◀"
+
+[node name="Right" type="Button" parent="HUD/MobileControls/MovePad"]
+offset_left = 156.0
+offset_top = 78.0
+offset_right = 220.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("MobileButtonNormal")
+theme_override_styles/pressed = SubResource("MobileButtonPressed")
+text = "▶"
+
+[node name="AimPad" type="Control" parent="HUD/MobileControls"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -244.0
+offset_top = -244.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Up" type="Button" parent="HUD/MobileControls/AimPad"]
+offset_left = 78.0
+offset_right = 142.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("MobileButtonNormal")
+theme_override_styles/pressed = SubResource("MobileButtonPressed")
+text = "▲"
+
+[node name="Down" type="Button" parent="HUD/MobileControls/AimPad"]
+offset_left = 78.0
+offset_top = 156.0
+offset_right = 142.0
+offset_bottom = 220.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("MobileButtonNormal")
+theme_override_styles/pressed = SubResource("MobileButtonPressed")
+text = "▼"
+
+[node name="Left" type="Button" parent="HUD/MobileControls/AimPad"]
+offset_top = 78.0
+offset_right = 64.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("MobileButtonNormal")
+theme_override_styles/pressed = SubResource("MobileButtonPressed")
+text = "◀"
+
+[node name="Right" type="Button" parent="HUD/MobileControls/AimPad"]
+offset_left = 156.0
+offset_top = 78.0
+offset_right = 220.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("MobileButtonNormal")
+theme_override_styles/pressed = SubResource("MobileButtonPressed")
+text = "▶"
+
+[node name="Fire" type="Button" parent="HUD/MobileControls/AimPad"]
+offset_left = 72.0
+offset_top = 72.0
+offset_right = 148.0
+offset_bottom = 148.0
+theme_override_colors/font_color = Color(1, 0.92, 0.82, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("MobileButtonNormal")
+theme_override_styles/pressed = SubResource("MobileButtonPressed")
+text = "TIRO"
 
 [connection signal="timeout" from="enemy spawner/Timer" to="enemy spawner" method="_on_timer_timeout"]
